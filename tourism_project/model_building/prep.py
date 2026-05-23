@@ -13,7 +13,8 @@ api = HfApi(token=os.getenv("HF_TOKEN"))
 raw_df = pd.read_csv(INPUT_DATA_PATH)
 print("Dataset loaded from Hugging Face.")
 
-# Drop CustomerID — not a predictive feature
+clean_df = raw_df.copy()
+# Drop CustomerID,Unnamed — not a predictive feature
 columns_to_drop = ["CustomerID", "Unnamed: 0"]
 
 existing_cols = [col for col in columns_to_drop if col in clean_df.columns]
