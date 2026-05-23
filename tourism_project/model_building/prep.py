@@ -14,7 +14,11 @@ raw_df = pd.read_csv(INPUT_DATA_PATH)
 print("Dataset loaded from Hugging Face.")
 
 # Drop CustomerID — not a predictive feature
-clean_df = raw_df.drop(columns=["CustomerID"], errors="ignore")
+columns_to_drop = ["CustomerID", "Unnamed: 0"]
+
+existing_cols = [col for col in columns_to_drop if col in clean_df.columns]
+
+clean_df = clean_df.drop(columns=existing_cols)
 
 # Fill missing values
 for col in clean_df.columns:
